@@ -8,14 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
+    var streaks: [Streak] = []
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationView {
+            VStack(spacing: 4) {
+                HStack {
+                    Text("Your Streaks")
+                        .font(.headline)
+                        .padding(.leading, 15.0)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                List(streaks) { streak in
+                    NavigationLink(destination: StreakDetailedView(streak: streak)){
+                        Text(streak.name)
+                    }
+                    Spacer()
+                }
+            }
+            .navigationTitle("Streak It")
         }
-        .padding()
     }
 }
 
